@@ -204,12 +204,14 @@ function Dashboard() {
 
   const chartData = useMemo(() => {
     const rows = history.filter((h) => h.round_type === config?.round_type && h.brand === tab);
-    const weeks = new Map<number, { week: number } & Record<string, number>>();
+    type ChartPoint = { week: number; [role: string]: number };
+    const weeks = new Map<number, ChartPoint>();
     for (const r of rows) {
-      const entry = weeks.get(r.week) ?? { week: r.week };
+      const entry: ChartPoint = weeks.get(r.week) ?? { week: r.week };
       entry[r.role] = r.order_placed;
       weeks.set(r.week, entry);
     }
+
     const demands = DEMANDS[(config?.round_type as RoundType) ?? "Rodada Teste"];
     return Array.from(weeks.values())
       .sort((a, b) => a.week - b.week)
