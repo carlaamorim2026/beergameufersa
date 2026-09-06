@@ -204,7 +204,7 @@ function Dashboard() {
 
   const chartData = useMemo(() => {
     const rows = history.filter((h) => h.round_type === config?.round_type && h.brand === tab);
-    const weeks = new Map<number, Record<string, number>>();
+    const weeks = new Map<number, { week: number } & Record<string, number>>();
     for (const r of rows) {
       const entry = weeks.get(r.week) ?? { week: r.week };
       entry[r.role] = r.order_placed;
@@ -212,8 +212,9 @@ function Dashboard() {
     }
     const demands = DEMANDS[(config?.round_type as RoundType) ?? "Rodada Teste"];
     return Array.from(weeks.values())
-      .sort((a, b) => (a.week ?? 0) - (b.week ?? 0))
-      .map((e) => ({ ...e, Cliente: demands[(e.week ?? 1) - 1] ?? 0 }));
+      .sort((a, b) => a.week - b.week)
+      .map((e) => ({ ...e, Cliente: demands[e.week - 1] ?? 0 }));
+
   }, [history, config, tab]);
 
   const exportCsv = () => {
