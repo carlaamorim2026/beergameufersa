@@ -14,7 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_config: {
+        Row: {
+          created_at: string
+          current_week: number
+          default_initial_stock: number
+          id: string
+          round_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_week?: number
+          default_initial_stock?: number
+          id?: string
+          round_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_week?: number
+          default_initial_stock?: number
+          id?: string
+          round_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      player_sessions: {
+        Row: {
+          backlog: number
+          brand: string
+          created_at: string
+          current_stock: number
+          id: string
+          incoming_order: number
+          is_joined: boolean
+          is_ready: boolean
+          role: string
+          updated_at: string
+          week_order: number | null
+        }
+        Insert: {
+          backlog?: number
+          brand: string
+          created_at?: string
+          current_stock?: number
+          id?: string
+          incoming_order?: number
+          is_joined?: boolean
+          is_ready?: boolean
+          role: string
+          updated_at?: string
+          week_order?: number | null
+        }
+        Update: {
+          backlog?: number
+          brand?: string
+          created_at?: string
+          current_stock?: number
+          id?: string
+          incoming_order?: number
+          is_joined?: boolean
+          is_ready?: boolean
+          role?: string
+          updated_at?: string
+          week_order?: number | null
+        }
+        Relationships: []
+      }
+      round_history: {
+        Row: {
+          brand: string
+          created_at: string
+          demand_received: number
+          final_backlog: number
+          final_stock: number
+          id: string
+          order_placed: number
+          role: string
+          round_type: string
+          week: number
+        }
+        Insert: {
+          brand: string
+          created_at?: string
+          demand_received?: number
+          final_backlog?: number
+          final_stock?: number
+          id?: string
+          order_placed?: number
+          role: string
+          round_type: string
+          week: number
+        }
+        Update: {
+          brand?: string
+          created_at?: string
+          demand_received?: number
+          final_backlog?: number
+          final_stock?: number
+          id?: string
+          order_placed?: number
+          role?: string
+          round_type?: string
+          week?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
